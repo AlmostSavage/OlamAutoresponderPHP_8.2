@@ -1,20 +1,22 @@
 <?php
-# Silent post code example for PHP
+// Edit 2023 CW
+// No major code edits, only comment edits
+// Silent post code example for PHP
 
 function silent_post($url, $port, $file, $var_array)
 {
-    # Clean up some possible problems
+    // Clean up some possible problems
     $url = str_replace("https://", "", $url);
     $url = str_replace("http://", "", $url);
 
-    # Set the post data
+    // Set the post data
     $postdata = "";
     foreach ($var_array as $key => $value) {
         $postdata .= $key . "=" . urlencode($value) . "&";
     }
     $postdata = trim((trim($postdata)), "&");
 
-    # Make the header
+    // Make the header
     $header = "POST $file HTTP/1.0\r\n";
     $header .= "Host: $url\r\n";
     $header .= "Connection: close\r\n";
@@ -26,7 +28,7 @@ function silent_post($url, $port, $file, $var_array)
     $header .= "\r\n";
     $header .= $postdata . "\r\n";
 
-    # Connect
+    // Connect
     $fp = fsockopen($url, $port, $errno, $errstr, 10);
     if (!$fp) {
         return NULL;
